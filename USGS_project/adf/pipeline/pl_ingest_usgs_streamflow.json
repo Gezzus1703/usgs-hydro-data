@@ -1,0 +1,82 @@
+{
+    "name": "pl_ingest_usgs_streamflow",
+    "properties": {
+        "activities": [
+            {
+                "name": "CopyUSGSStreamflow",
+                "type": "Copy",
+                "dependsOn": [],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 3,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "source": {
+                        "type": "RestSource",
+                        "httpRequestTimeout": "00:01:40",
+                        "requestInterval": "00:00:00.010",
+                        "requestMethod": "GET"
+                    },
+                    "sink": {
+                        "type": "JsonSink",
+                        "storeSettings": {
+                            "type": "AzureBlobFSWriteSettings"
+                        },
+                        "formatSettings": {
+                            "type": "JsonWriteSettings"
+                        }
+                    },
+                    "enableStaging": false
+                },
+                "inputs": [
+                    {
+                        "referenceName": "ds_rest_api_json",
+                        "type": "DatasetReference",
+                        "parameters": {
+                            "stationId": "@pipeline().parameters.stationId",
+                            "startDate": "@pipeline().parameters.startDate"
+                        }
+                    }
+                ],
+                "outputs": [
+                    {
+                        "referenceName": "ds_adls_gen2_json",
+                        "type": "DatasetReference",
+                        "parameters": {
+                            "year": "@pipeline().parameters.year",
+                            "month": "@pipeline().parameters.month",
+                            "day": "@pipeline().parameters.day"
+                        }
+                    }
+                ]
+            }
+        ],
+        "parameters": {
+            "stationId": {
+                "type": "string",
+                "defaultValue": "01646500"
+            },
+            "startDate": {
+                "type": "string",
+                "defaultValue": "2026-10-01"
+            },
+            "year": {
+                "type": "string",
+                "defaultValue": "2026"
+            },
+            "month": {
+                "type": "string",
+                "defaultValue": "10"
+            },
+            "day": {
+                "type": "string",
+                "defaultValue": "12"
+            }
+        },
+        "annotations": []
+    }
+}

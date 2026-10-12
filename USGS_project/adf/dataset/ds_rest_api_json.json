@@ -1,0 +1,25 @@
+{
+    "name": "ds_rest_api_json",
+    "type": "Microsoft.DataFactory/factories/datasets",
+    "properties": {
+        "linkedServiceName": {
+            "referenceName": "ls_rest_api",
+            "type": "LinkedServiceReference"
+        },
+        "parameters": {
+            "stationId": {
+                "type": "String"
+            },
+            "startDate": {
+                "type": "String"
+            }
+        },
+        "type": "RestResource",
+        "typeProperties": {
+            "relativeUrl": {
+                "value": "?format=json&sites=@{dataset().stationId}&parameterCd=00060&startDT=@{dataset().startDate}",
+                "type": "Expression"
+            }
+        }
+    }
+}

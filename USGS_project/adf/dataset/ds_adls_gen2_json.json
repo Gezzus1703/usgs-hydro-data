@@ -1,0 +1,34 @@
+{
+    "name": "ds_adls_gen2_json",
+    "type": "Microsoft.DataFactory/factories/datasets",
+    "properties": {
+        "linkedServiceName": {
+            "referenceName": "ls_adls_gen2",
+            "type": "LinkedServiceReference"
+        },
+        "parameters": {
+            "year": {
+                "type": "String"
+            },
+            "month": {
+                "type": "String"
+            },
+            "day": {
+                "type": "String"
+            }
+        },
+        "type": "Json",
+        "typeProperties": {
+            "location": {
+                "type": "AzureBlobFSLocation",
+                "folderPath": {
+                    "value": "raw/usgs/streamflow/year=@{dataset().year}/month=@{dataset().month}/day=@{dataset().day}",
+                    "type": "Expression"
+                },
+                "fileName": "streamflow_data.json",
+                "fileSystem": "landing"
+            }
+        },
+        "schema": []
+    }
+}

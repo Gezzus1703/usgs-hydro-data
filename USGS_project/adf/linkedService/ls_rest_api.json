@@ -1,0 +1,12 @@
+{
+    "name": "ls_rest_api",
+    "type": "Microsoft.DataFactory/factories/linkedservices",
+    "properties": {
+        "type": "RestService",
+        "typeProperties": {
+            "url": "https://waterservices.usgs.gov/nwis/iv/",
+            "enableServerCertificateValidation": true,
+            "authenticationType": "Anonymous"
+        }
+    }
+}
