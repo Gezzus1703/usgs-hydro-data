@@ -151,17 +151,34 @@ To deploy and test this project locally or in your own Azure tenant, you will ne
 
 ```text
 .
-├── adf/                             # ARM templates & JSON pipeline definitions for ADF
-├── infrastructure/                  # IaC templates (Bicep/Terraform) for Azure setup
-├── assets/                          # Architecture diagrams, ERDs, and visual previews
-│   ├── architecture_diagram.drawio
-│   └── powerbi_preview.png
-├── databricks/                      # Core Databricks Workspace Files
-│   ├── PL_USGS_Bronze_DEV/          # Auto Loader ingestion logic
-│   ├── PL_USGS_Silver_DEV/          # Cleansing & CDC SCD Type 2 logic
-│   └── PL_USGS_Gold_DEV/            # Business aggregations & KPIs
-├── .gitignore                       # Exclusion rules for temporary files, tokens, and configs
-└── README.md                        # Comprehensive project documentation
+└── USGS_project
+    ├── adf/
+    │   ├── dataset/
+    │   │   ├── ds_adls_gen2_json.json
+    │   │   └── ds_rest_api_json.json
+    │   ├── linkedService/
+    │   │   ├── ls_adls_gen2.json
+    │   │   └── ls_rest_api.json
+    │   └── pipeline/
+    │       └── pl_ingest_usgs_streamflow.json
+    ├── assets/
+    │   ├── 01_azure_resource_group.png
+    │   ├── 02_adf_pipeline_execution.png
+    │   ├── 03_databricks_workspace.png
+    │   ├── 04_unity_catalog_schemas.png
+    │   ├── 05_databricks_job_dag.png
+    │   ├── 06_databricks_job_timeline.png
+    │   └── 07_final_dashboard_preview.png
+    ├── databricks/
+    │   ├── dashboards/
+    │   │   └── USGS Water Discharge Analysis.lvdash.json
+    │   ├── lakeflow/
+    │   │   ├── PL_USGS_Bronze_DEV/
+    │   │   ├── PL_USGS_Gold_DEV/
+    │   │   └── PL_USGS_Silver_DEV/
+    │   └── tests/
+    │       └── Test.py
+    └── README.md
 ```
 
 ---
